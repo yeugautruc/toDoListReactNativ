@@ -12,7 +12,7 @@ export const HomeScreen = () => {
             </View>
             <View style={styles.body}>
                 <Text>
-                    Landing Screen
+                    Home Screen
                 </Text>
             </View>
             <View style={styles.footer}>
@@ -27,7 +27,7 @@ export const HomeScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rbga(242,242,242,1)'
+        backgroundColor: 'rgba(242,242,242,1.0)'
     },
     navigation: {
         flex: 2,

@@ -1,11 +1,14 @@
 import React from "react"
 import { useState, useReducer, useEffect } from "react";
 import { View, Text, StyleSheet, Dimensions, Image, Alert } from 'react-native'
+import { useNavigation } from '../ultils'
 import * as Location from 'expo-location'
 
 const screenWidth = Dimensions.get('screen').width
 
 export const LandingScreen = () => {
+
+    const { navigate } = useNavigation()
 
     const [errorMsg, setErrMsg] = useState("")
     const [address, setAddress] = useState<Location.LocationGeocodedAddress>()
@@ -13,8 +16,7 @@ export const LandingScreen = () => {
 
     useEffect(() => {
         (async () => {
-            Alert.alert('hier')
-            let { status } = await Location.requestBackgroundPermissionsAsync();
+            let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
                 setErrMsg('Permission to access location is not granted')
             }
@@ -26,14 +28,20 @@ export const LandingScreen = () => {
 
                 for (let item of addressResponse) {
                     setAddress(item)
-                    let currentAddress = `${item.name},${item.street},${item.postalCode},${item.country}`
+                    let currentAddress = `${item.street},${item.postalCode},${item.country}`
                     setDisplayAddress(currentAddress)
+
+                    if (currentAddress.length > 0) {
+                        setTimeout(() => {
+                            navigate('homeStack')
+                        }, 2000)
+                    }
                     return;
                 }
             } else {
                 // notify location is wrong
             }
-        })
+        })();
     }, [])
 
     return (
@@ -61,7 +69,7 @@ export const LandingScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgba(242,242,242,1)'
+        backgroundColor: 'rgba(242,242,242,1.0)'
     },
     navigation: {
         flex: 2,

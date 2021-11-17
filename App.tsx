@@ -1,10 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { LandingScreen } from './src/screens/Landingscreen';
+import { StyleSheet, Image, Text, View } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
+
+import { LandingScreen } from './src/screens/Landingscreen';
 import { HomeScreen } from './src/screens/HomeScreen';
 
 const switchNavigator = createSwitchNavigator({
@@ -19,14 +19,14 @@ const switchNavigator = createSwitchNavigator({
   },
   homeStack: createBottomTabNavigator({
     // Home Tab Icon
-    home: {
+    Home: {
       screen: createStackNavigator({
         Homepage: HomeScreen
       }),
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
           let icon = focused == true ? require('./src/images/home_icon.png') : require('./src/images/home_icon_n.png')
-          return <img src={icon} style={styles.tabIcon}></img>
+          return <Image style={styles.tabIcon} source={icon} />;
         }
       }
     },
@@ -34,12 +34,12 @@ const switchNavigator = createSwitchNavigator({
     // Offer Tab Icon
     Offer: {
       screen: createStackNavigator({
-        Homepage: HomeScreen
+        OfferPage: HomeScreen
       }),
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
-          let icon = focused == true ? require('./src/images/home_icon.png') : require('./src/images/home_icon_n.png')
-          return <img src={icon} style={styles.tabIcon}></img>
+          let icon = focused == true ? require('./src/images/offer_icon.png') : require('./src/images/offer_icon_n.png')
+          return <Image style={styles.tabIcon} source={icon} />;
         }
       }
     },
@@ -47,12 +47,12 @@ const switchNavigator = createSwitchNavigator({
     // Cart Tab Icon
     Cart: {
       screen: createStackNavigator({
-        Homepage: HomeScreen
+        CartPage: HomeScreen
       }),
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
-          let icon = focused == true ? require('./src/images/home_icon.png') : require('./src/images/home_icon_n.png')
-          return <img src={icon} style={styles.tabIcon}></img>
+          let icon = focused == true ? require('./src/images/cart_icon_n.png') : require('./src/images/cart_icon.png')
+          return <Image style={styles.tabIcon} source={icon} />;
         }
       }
     },
@@ -60,12 +60,12 @@ const switchNavigator = createSwitchNavigator({
     // Account Tab Icon
     Account: {
       screen: createStackNavigator({
-        Homepage: HomeScreen
+        AccountPage: HomeScreen
       }),
       navigationOptions: {
         tabBarIcon: ({ focused, tintColor }) => {
-          let icon = focused == true ? require('./src/images/home_icon.png') : require('./src/images/home_icon_n.png')
-          return <img src={icon} style={styles.tabIcon}></img>
+          let icon = focused == true ? require('./src/images/account_icon.png') : require('./src/images/account_icon_n.png')
+          return <Image style={styles.tabIcon} source={icon} />;
         }
       }
     }
